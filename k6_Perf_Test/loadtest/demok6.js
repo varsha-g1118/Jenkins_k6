@@ -3,7 +3,7 @@
 import { sleep, group, check } from 'k6'
 import http from 'k6/http'
 import exec from "k6/execution";
-export const options = { vus: 5, duration: '2m' }
+export const options = { vus: 1, duration: '5s' }
 
 //--------------------------------vu code-------------------------------------------------//
 export default function main() {
@@ -28,7 +28,7 @@ export default function main() {
  
 
   group('S01_T02_Find_Flight - https://blazedemo.com/reserve.php', function () {
-    response2 = http.post('https://blazedemo.com/reserve.php',   
+    let response2 = http.post('https://blazedemo.com/reserve.php',   
       {
         fromPort: 'London',
         toPort: 'Berlin',
@@ -98,6 +98,6 @@ export default function main() {
         },
       }
     )
-  })}
+  })}sleep(5)
 
   

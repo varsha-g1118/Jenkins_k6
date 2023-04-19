@@ -7,6 +7,15 @@ pipeline {
                 sh 'sudo touch setup_k6.sh'
                 sh 'sudo chmod +x setup_k6.sh'
                 sh 'sudo setup_k6.sh'
+                sh 'set -ex'
+
+sh 'sudo apt-get update'
+sh 'sudo apt-get install dirmngr --install-recommends'
+sh 'sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61'
+echo "deb https://dl.bintray.com/loadimpact/deb stable main" | 
+sh 'sudo tee -a /etc/apt/sources.list'
+sh 'sudo apt-get update'
+sh 'sudo apt-get install k6'
                 echo 'Running K6 performance tests...'
                 sh 'k6 run loadtest/demok6.js'
             }
